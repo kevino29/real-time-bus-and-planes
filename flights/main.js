@@ -1,4 +1,4 @@
-(function(){
+(function() {
 
     //create map in leaflet and tie it to the div called 'theMap'
     let map = L.map('theMap').setView([42, -60], 4);
@@ -7,7 +7,7 @@
     let markers = [];
 
     // Create an icon object for the marker
-    const busIcon = L.icon({
+    const planeIcon = L.icon({
         iconUrl: 'plane.png',
         iconSize: [50,40],
     });
@@ -18,8 +18,8 @@
     showLoader();
     requestAPI();
 
-    // Update the data every TEN seconds
-    setInterval(requestAPI, 10000);
+    // REQUEST data every SEVEN seconds
+    setInterval(requestAPI, 7000);
 
     async function requestAPI() {
         await fetch(url)
@@ -99,7 +99,7 @@
         // Otherwise, create a new marker then add it to the group
         else {
             let marker = L.marker(coord, { 
-                icon: busIcon,
+                icon: planeIcon,
                 rotationAngle: feature.properties.trueTrack,
                 rotationOrigin: 'center center',
             });
@@ -117,4 +117,4 @@
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
-})()
+})();
